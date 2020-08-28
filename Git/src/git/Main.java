@@ -45,11 +45,11 @@ public class Main {
                 Zona = Git.gitCrear(Zona);
             }
             
-            /*
             if(opcion == 2){
                 Zona = Git.gitAdd(Zona);
             }
             
+            /*
             if(opcion == 3){
                 Zona = Git.gitCommit(Zona);
             }

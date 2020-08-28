@@ -46,4 +46,92 @@ public class Git {
         // Se retorna nueva zona de trabajo        
         return zona;
     }
+    
+    public static ZonaTrabajo gitAdd(ZonaTrabajo zona){
+        
+        // Archivos Workspace
+
+        Workspace workspaceAuxiliar = zona.getWorkspace();
+        ArrayList<TextoPlano> workspaceTextos = workspaceAuxiliar.getTextosPlanos();
+
+        // Archivos Index
+
+        Index indexAuxliar = zona.getIndex();
+        ArrayList<TextoPlano> indexTextos = indexAuxliar.getTextosPlanos();
+        
+        // Caso borde
+        if(workspaceTextos.isEmpty()){
+            System.out.println("El Workspace no posee archivos");
+            System.out.println(" ");
+            return zona;
+        }
+        
+        System.out.println("Escoja opción de add");
+        System.out.println("1. Todos los Archivos");
+        System.out.println("2. Ingresar Archivos especificos");
+        Scanner objOpcion = new Scanner(System.in);
+        System.out.println("INTRODUZCA SU OPCIÓN: ");
+        int opcion = objOpcion.nextInt();
+        
+        // Opcion de Ingresar todos los Archivos
+        if(opcion == 1){
+
+            // Se unen las listas
+            
+            ArrayList<TextoPlano> TextosPlanosFinal = Metodos.unirTextosPlanos(indexTextos, workspaceTextos);
+            
+            // Repetidos 
+
+            ArrayList<TextoPlano> TextosPlanosFinal2 = Metodos.repetidosTextosPlanos(TextosPlanosFinal);
+            
+            // Se crea nuevo Index
+            
+            Index indexFinal = new Index();
+            indexFinal.setTextosPlanos(TextosPlanosFinal2);
+            
+            // Se insatala nuevo index
+            
+            zona.setIndex(indexFinal);
+            
+            // Se retorna nueva zona
+            
+            return zona;
+        }
+
+        // Opcion de Ingresar siertos archivos
+        if(opcion == 2){
+            
+            // Se pregunta cuales archivos se eligiran
+            System.out.println("Cuantos archivos agregara: ");
+            Scanner objCantidad = new Scanner(System.in);
+            int Cantidad = objCantidad.nextInt();
+            
+            // Se obtienen los archivos ingresados por el usuario
+            ArrayList<TextoPlano> workspaceAuxiliar2 = Metodos.obtenerArchivos(workspaceTextos,Cantidad);
+            
+            // Se unen las listas
+            
+            ArrayList<TextoPlano> TextosPlanosFinal = Metodos.unirTextosPlanos(indexTextos, workspaceAuxiliar2);
+            
+            // Repetidos 
+
+            ArrayList<TextoPlano> TextosPlanosFinal2 = Metodos.repetidosTextosPlanos(TextosPlanosFinal);
+            
+            // Se crea nuevo Index
+            
+            Index indexFinal = new Index();
+            indexFinal.setTextosPlanos(TextosPlanosFinal2);
+            
+            // Se insatala nuevo index
+            
+            zona.setIndex(indexFinal);
+            
+            // Se retorna nueva zona
+            
+            return zona;
+        }          
+        
+        return null;
+    }
+    
 }

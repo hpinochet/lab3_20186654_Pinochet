@@ -3,6 +3,7 @@ package git;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Metodos {
     
@@ -35,4 +36,41 @@ public class Metodos {
         
         return TextosPlanosFinal2;      
     }
+    
+    public static ArrayList<TextoPlano> unirTextosPlanos(ArrayList<TextoPlano> TextosAux, ArrayList<TextoPlano> TextosAux2){
+        
+        ArrayList<TextoPlano> TextosPlanosFinal = new ArrayList<>();
+        
+        for(int i = 0; i < TextosAux.size(); i++){
+            TextosPlanosFinal.add(TextosAux.get(i));
+        }
+        
+        for(int i = 0; i < TextosAux2.size(); i++){
+            TextosPlanosFinal.add(TextosAux2.get(i));
+        }
+        
+        return TextosPlanosFinal;
+    }
+    
+    public static ArrayList<TextoPlano> obtenerArchivos(ArrayList<TextoPlano> TextosPlanos, int Cantidad){
+        
+        ArrayList<TextoPlano> TextosPlanosFinal = new ArrayList<>();
+        
+        for(int i = 0; i < Cantidad; i++){        
+            System.out.println("Nombre del archivo: ");
+            Scanner objArchivo = new Scanner(System.in);
+            String nombreArchivo = objArchivo.nextLine();
+            for(int j = 0; j < TextosPlanos.size(); j++){
+                TextoPlano Aux2 = TextosPlanos.get(j);
+                String nombreArchivoAux = Aux2.getNombre();
+                if(nombreArchivo.equals(nombreArchivoAux)){
+                    TextosPlanosFinal.add(Aux2);
+                }
+                
+            }
+        }
+        
+        return TextosPlanosFinal;       
+    }
+        
 }
