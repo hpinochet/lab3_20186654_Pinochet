@@ -41,12 +41,11 @@ public class Main {
             
             System.out.println(" ");
             
-            /*
             if(opcion == 1){
                 Zona = Git.gitCrear(Zona);
             }
             
-            
+            /*
             if(opcion == 2){
                 Zona = Git.gitAdd(Zona);
             }
