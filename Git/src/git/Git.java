@@ -129,9 +129,66 @@ public class Git {
             // Se retorna nueva zona
             
             return zona;
-        }          
-        
-        return null;
+        }
+        return zona;
     }
-    
+        
+    public static ZonaTrabajo gitCommit(ZonaTrabajo zona){
+        
+        //Selectores
+        
+        // Commits Local Repository
+        
+        LocalRepository auxiliarLocal = zona.getLocal();
+        ArrayList<Commit> commitsAux = auxiliarLocal.getCommits();
+         
+        // Convertir a commit Index
+        
+        Index auxiliarIndex = zona.getIndex();
+        ArrayList<TextoPlano> textosIndex = auxiliarIndex.getTextosPlanos();
+        
+        // Condicion de Borde
+        if(textosIndex.isEmpty()){
+            System.out.println("El Index no posee archivos");
+            System.out.println(" ");
+            return zona;
+        }
+        
+        // Se obtienen los datos del usuario para el commit
+        
+        System.out.println("Ingrese nombre del autor del commit: ");
+        Scanner objAutor = new Scanner(System.in);
+        String nombreAutor = objAutor.nextLine();
+        
+        System.out.println("Ingrese mensaje del commit: ");
+        Scanner objMensaje = new Scanner(System.in);
+        String mensajeCommit = objMensaje.nextLine();
+        
+        String fecha = Metodos.obtenerFecha();
+         
+        // Se crea el nuevo Commit
+        
+        Commit commitAux = new Commit(nombreAutor,fecha,mensajeCommit,textosIndex);
+        
+        // Se inserta nuevo commit
+        
+        commitsAux.add(commitAux);
+        
+        // Se crea nuevo Index y Local Repository
+        
+        Index indexFinal = new Index();
+            
+        LocalRepository LocalFinal = new LocalRepository();
+        LocalFinal.setCommits(commitsAux);
+
+        // Se insatala nuevo Index y Local
+        
+        zona.setIndex(indexFinal);
+        zona.setLocal(LocalFinal);
+
+        // Se retorna nueva zona
+        
+        return zona;
+    }    
+            
 }

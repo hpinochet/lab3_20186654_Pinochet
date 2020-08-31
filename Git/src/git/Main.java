@@ -49,11 +49,10 @@ public class Main {
                 Zona = Git.gitAdd(Zona);
             }
             
-            /*
             if(opcion == 3){
                 Zona = Git.gitCommit(Zona);
             }
-            
+            /*
             if(opcion == 4){
                 Zona = Git.gitPull(Zona);
             }
