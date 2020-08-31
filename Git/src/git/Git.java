@@ -189,6 +189,48 @@ public class Git {
         // Se retorna nueva zona
         
         return zona;
-    }    
+    }
+    
+    public static ZonaTrabajo gitPush(ZonaTrabajo zona){
+        
+        // Selectores
+        
+        // Commits Remote Repository
+        
+        RemoteRepository auxiliarRemote = zona.getRemote();
+        ArrayList<Commit> commitsRemote = auxiliarRemote.getCommits();
+        
+        // Commits Local Repository
+        
+        LocalRepository auxiliarLocal = zona.getLocal();
+        ArrayList<Commit> commitsLocal = auxiliarLocal.getCommits();
+        
+        // Condicion de Borde
+        
+        if(commitsLocal.isEmpty()){
+            System.out.println("El Local Repository no posee commits");
+            System.out.println(" ");
+            return zona;
+        }
+        
+        // Se unen Los commits
+        
+        ArrayList<Commit> commitsFinal = Metodos.unirCommits(commitsRemote, commitsLocal);
+        
+        // Se filtran los commits
+        
+        ArrayList<Commit> commitsFinal2 = Metodos.repetidosCommits(commitsFinal);
+        
+        // Se crea nuevo Remote Repository
+        
+        RemoteRepository RemoteFinal = new RemoteRepository();
+        RemoteFinal.setCommits(commitsFinal2);
+        
+        // Se inserta nuevo Remote Repository
+        
+        zona.setRemote(RemoteFinal);
+        
+        return zona;            
+    }
             
 }

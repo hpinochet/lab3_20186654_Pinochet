@@ -56,11 +56,11 @@ public class Main {
             if(opcion == 4){
                 Zona = Git.gitPull(Zona);
             }
-            
+            */
             if(opcion == 5){
                 Zona = Git.gitPush(Zona);
             }
-            
+            /*
             if(opcion == 6){
                 Git.gitStatus(Zona);
                 System.out.println(" ");

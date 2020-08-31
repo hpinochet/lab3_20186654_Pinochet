@@ -72,5 +72,43 @@ public class Metodos {
         
         return TextosPlanosFinal;       
     }
+    
+    public static ArrayList<Commit> unirCommits(ArrayList<Commit> commitsAux, ArrayList<Commit> commitsAux2){
+        
+        ArrayList<Commit> CommitsFinal = new ArrayList<>();
+        
+        for(int i = 0; i < commitsAux.size(); i++){
+            CommitsFinal.add(commitsAux.get(i));
+        }
+        
+        for(int i = 0; i < commitsAux2.size(); i++){
+            CommitsFinal.add(commitsAux2.get(i));
+        }
+        
+        return CommitsFinal;
+    }
+    
+    public static ArrayList<Commit> repetidosCommits(ArrayList<Commit> CommitsFinal){
+        ArrayList<Commit> CommitsFinal2 = new ArrayList<>();
+        Commit Aux;
+        Commit Aux2;
+        boolean Repetido = false;
+
+        for(int i = 0; i < CommitsFinal.size(); i++){
+            Aux = CommitsFinal.get(i);
+            for(int j = i + 1; j < CommitsFinal.size(); j++){
+                Aux2 = CommitsFinal.get(j);
+                if(Aux.equals(Aux2)){
+                    Repetido = true;
+                }                
+            }
+            if(Repetido == false){
+                CommitsFinal2.add(CommitsFinal.get(i));
+            }
+            Repetido = false;
+        }
+        
+        return CommitsFinal2;
+    }
         
 }
