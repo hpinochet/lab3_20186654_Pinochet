@@ -52,11 +52,11 @@ public class Main {
             if(opcion == 3){
                 Zona = Git.gitCommit(Zona);
             }
-            /*
+            
             if(opcion == 4){
                 Zona = Git.gitPull(Zona);
             }
-            */
+  
             if(opcion == 5){
                 Zona = Git.gitPush(Zona);
             }

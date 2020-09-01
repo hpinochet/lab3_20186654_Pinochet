@@ -232,5 +232,57 @@ public class Git {
         
         return zona;            
     }
+    
+    public static ZonaTrabajo gitPull(ZonaTrabajo zona){
+        
+        // Selectores
+        
+        // Textos Planos Workspace
+        
+        Workspace workspace = zona.getWorkspace();
+        ArrayList<TextoPlano> TextosPlanosWorkspace = workspace.getTextosPlanos();
+        
+        // Commits Remote Repository
+        
+        RemoteRepository auxiliarRemote = zona.getRemote();
+        ArrayList<Commit> commitsRemote = auxiliarRemote.getCommits();
+        
+        // Condicion de Borde
+        
+        if(commitsRemote.isEmpty()){
+            System.out.println("El Remote Repository no posee commits");
+            System.out.println(" ");
+            return zona;
+        }
+            
+        // Se extraen los Textos planos de los commits
+        
+        ArrayList<TextoPlano> TextosPlanosFinal = new ArrayList<>();
+        
+        for(int i = 0; i < commitsRemote.size(); i++){
+            Commit auxiliarCommit = commitsRemote.get(0);
+            ArrayList<TextoPlano> auxliarTextosPlanos = auxiliarCommit.getTextosPlanos();
+            Metodos.unirTextosPlanos(TextosPlanosFinal, auxliarTextosPlanos);
+        }
+        
+        // Se unen los Textos planos del Remote Repository con los de Workspace
+        
+        ArrayList<TextoPlano> TextosPlanosFinal2 = Metodos.unirTextosPlanos(TextosPlanosWorkspace, TextosPlanosFinal);
+            
+        // Repetidos 
+
+        ArrayList<TextoPlano> TextosPlanosFinal3 = Metodos.repetidosTextosPlanos(TextosPlanosFinal2);
+        
+        // Se crea nuevo Workspace
+        Workspace workspaceFinal = new Workspace();
+        workspaceFinal.setTextosPlanos(TextosPlanosFinal3);
+        
+        // Se instala nuevo workspace
+        zona.setWorkspace(workspaceFinal);
+        
+        // Se retorna nueva zona de trabajo        
+        return zona;
+             
+    }
             
 }
