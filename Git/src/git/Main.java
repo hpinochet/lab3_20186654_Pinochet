@@ -60,7 +60,7 @@ public class Main {
             if(opcion == 5){
                 Zona = Git.gitPush(Zona);
             }
-            /*
+       
             if(opcion == 6){
                 Git.gitStatus(Zona);
                 System.out.println(" ");
@@ -70,8 +70,7 @@ public class Main {
                 Git.gitLog(Zona);
                 System.out.println(" ");
             }
-            */
-
+            
             System.out.println(Zona);
             System.out.println(" ");
         }        

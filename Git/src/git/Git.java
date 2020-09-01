@@ -284,5 +284,71 @@ public class Git {
         return zona;
              
     }
-            
+    
+    public static void gitStatus(ZonaTrabajo zona){
+        
+        // Informacion Repositorio
+        
+        String nombreRepo = zona.getNombreRepositorio();
+        String nombreAutor = zona.getNombreAutor();
+        
+        // Numero Archivos Worksapce
+        
+        Workspace workspace = zona.getWorkspace();
+        ArrayList<TextoPlano> textosPlanoWorkpace = workspace.getTextosPlanos();
+        int nArchWorkspace = textosPlanoWorkpace.size();
+        
+        // Numero Archivos Index
+        
+        Index index = zona.getIndex();
+        ArrayList<TextoPlano> textosPlanoIndex = index.getTextosPlanos();
+        int nArchIndex = textosPlanoIndex.size();
+        
+        // Numero Commits Local Repository
+        
+        LocalRepository local = zona.getLocal();
+        ArrayList<Commit> commitsLocal = local.getCommits();
+        int nCommLocal = commitsLocal.size();
+        
+        // Numero Commits Remote Repository
+        
+        RemoteRepository remote = zona.getRemote();
+        ArrayList<Commit> commitsRemote = remote.getCommits();
+        
+        boolean Cambios = Metodos.alDia(commitsLocal, commitsRemote);
+        
+        if(Cambios){
+            System.out.println("Nombre Repositorio: " + nombreRepo + "\nNombre Autor Repositorio: " + nombreAutor + "\nNumero Archivos en Workspace: " +
+                    nArchWorkspace + "\nNumero Archivos en Index: " + nArchIndex + "\nNumero Commits en Local Repository: " + nCommLocal 
+                    + "\nRemote Repository esta al dia: Sí" );
+        }else{
+            System.out.println("Nombre Repositorio: " + nombreRepo + "\nNombre Autor Repositorio: " + nombreAutor + "\nNumero Archivos en Workspace: " +
+                    nArchWorkspace + "\nNumero Archivos en Index: " + nArchIndex + "\nNumero Commits en Local Repository: " + nCommLocal
+                    + "\nRemote Repository esta al dia: No" );
+        }
+    }
+    
+    public static void gitLog(ZonaTrabajo zona){
+        
+        // Commits Local Repository
+        
+        LocalRepository local = zona.getLocal();
+        ArrayList<Commit> commitsLocal = local.getCommits();
+        
+        ArrayList<Commit> ultimosCommits = new ArrayList<>();
+        
+        if(commitsLocal.size() <= 5){
+            for(int i = commitsLocal.size() - 1; i >= 0; i-- ){
+                ultimosCommits.add(commitsLocal.get(i));
+            }
+        }else{
+            for(int i = commitsLocal.size() - 1; i >= commitsLocal.size() - 5; i-- ){
+                ultimosCommits.add(commitsLocal.get(i));
+            }           
+        }
+        
+        System.out.println(ultimosCommits);
+    }
+    
+    
 }

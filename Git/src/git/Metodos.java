@@ -110,5 +110,25 @@ public class Metodos {
         
         return CommitsFinal2;
     }
+    
+    public static boolean alDia(ArrayList<Commit> CommitsLocal, ArrayList<Commit> CommitsRemote){
         
+        int Acumulador = 0;
+    
+        for(int i = 0; i < CommitsLocal.size(); i++){        
+            Commit auxCommit = CommitsLocal.get(i);
+            for(int j = 0; j < CommitsRemote.size(); j++){
+                Commit Aux2 = CommitsRemote.get(j);
+                if(auxCommit.equals(Aux2)){
+                    Acumulador++;
+                }
+            }
+        }
+        
+        if(Acumulador == CommitsLocal.size()){
+            return true;
+        }else{
+            return false;
+        }      
+    }
 }
